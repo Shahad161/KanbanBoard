@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.kanban_board.ui.notes.NotesViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/off_white"
+        tools:context=".ui.notes.NotesFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_note"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="8dp"
+            app:items="@{viewModel.notes}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2"
+            tools:listitem="@layout/item_note" />
+
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="500dp"
+            android:layout_height="500dp"
+            android:layout_marginStart="128dp"
+            android:layout_marginBottom="332dp"
+            android:background="@drawable/circle_two"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="500dp"
+            android:layout_height="500dp"
+            android:layout_marginEnd="44dp"
+            android:layout_marginBottom="376dp"
+            android:transitionName="backgroundTransition"
+            android:background="@drawable/circle_one"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="Task"
+            android:textColor="@color/purple_500"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/recycler_note"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/hello"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="84dp"
+            android:text="Hello Gabriel!"
+            android:textColor="@color/white"
+            android:textSize="32dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="-24dp"
+            android:text="You have a lot task scheduled for today."
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/hello"
+            app:layout_constraintStart_toStartOf="@+id/hello"
+            app:layout_constraintTop_toBottomOf="@+id/hello" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/add_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="76dp"
+            android:background="@drawable/button"
+            android:padding="16dp"
+            android:text="Create new task"
+            android:textColor="@color/dark_purple"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/text"
+            app:layout_constraintTop_toBottomOf="@+id/text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</layout>

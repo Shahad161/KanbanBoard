@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.example.kanban_board.ui.updateNote.UpdateNoteViewModel" />
+
+
+        <variable
+            name="item"
+            type="com.example.kanban_board.data.Note" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="1000dp"
+            android:layout_height="1000dp"
+            android:transitionName="backgroundTransition"
+            android:background="@drawable/background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="500dp"
+            android:layout_height="500dp"
+            android:layout_marginStart="128dp"
+            android:layout_marginBottom="332dp"
+            android:background="@drawable/circle_two"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="8dp"
+            android:text="Update Task"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/view_const"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view_const"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/card"
+            android:padding="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/back">
+
+            <EditText
+                android:id="@+id/textInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text"
+                android:hint="Assigned"
+                android:padding="16dp"
+                android:text="@={viewModel.assigned}"
+                android:textColor="@color/dark_purple"
+                app:layout_constraintEnd_toEndOf="@+id/view_const"
+                app:layout_constraintStart_toStartOf="@+id/view_const"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="0dp"
+                android:layout_height="220dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/edit_text"
+                android:gravity="bottom|left"
+                android:hint="Description"
+                android:maxLength="2000"
+                android:padding="16dp"
+                android:text="@={viewModel.description}"
+                android:textColor="@color/dark_purple"
+                app:layout_constraintEnd_toEndOf="@+id/textInputEditText"
+                app:layout_constraintStart_toStartOf="@+id/textInputEditText"
+                app:layout_constraintTop_toBottomOf="@+id/textInputEditText" />
+
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/description">
+
+                <RadioButton
+                    android:id="@+id/backlog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:checked="@{viewModel.updateItem.in_backlog ?  true : false }"
+                    android:onClick="@{(v) -> viewModel.option(1)}"
+                    android:text="in Backlog" />
+
+                <RadioButton
+                    android:id="@+id/progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:checked="@{viewModel.updateItem.progress ?  true : false }"
+                    android:onClick="@{(v) -> viewModel.option(2)}"
+                    android:text="in progress"
+
+
+                    />
+
+                <RadioButton
+                    android:id="@+id/done"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:checked="@{viewModel.updateItem.done ?  true : false }"
+                    android:onClick="@{(v) -> viewModel.option(3)}"
+                    android:text="done"
+
+
+                    />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/purple_500"
+                android:text="Update"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

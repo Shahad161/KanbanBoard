@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="item"
+            type="com.example.kanban_board.data.Note"
+            />
+
+        <variable
+            name="listener"
+            type="com.example.kanban_board.ui.notes.NoteInteractionListener" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="16dp"
+
+        android:onClick="@{() -> listener.onClickNote(item)}"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            >
+
+<!--            <ImageView-->
+<!--                android:id="@+id/imageView"-->
+<!--                android:layout_width="24dp"-->
+<!--                android:layout_height="24dp"-->
+<!--                android:src="@drawable/pin"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+            <TextView
+                android:id="@+id/assigned"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/shap_assigned"
+                android:lines="1"
+                android:padding="8dp"
+                android:text="@{item.assigned}"
+                android:textColor="@color/purple_500"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/description"
+                tools:text="content text" />
+
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@{item.description}"
+                android:textColor="@color/dark_purple"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toStartOf="@+id/delete_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="content text" />
+
+            <TextView
+                android:id="@+id/backlog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/state_shap_backlog"
+                android:padding="8dp"
+                android:text="In Backlog"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                android:visibility="@{item.in_backlog ?  View.VISIBLE : View.GONE }"
+                app:layout_constraintBottom_toBottomOf="@+id/assigned"
+                app:layout_constraintStart_toEndOf="@+id/assigned"
+                app:layout_constraintTop_toTopOf="@+id/assigned"
+                tools:text="In Backlog" />
+
+            <TextView
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/state_shap_progress"
+                android:padding="8dp"
+                android:text="In Progress"
+                android:textColor="@color/yellow"
+                android:textStyle="bold"
+                android:visibility="@{item.progress ?  View.VISIBLE : View.GONE }"
+                app:layout_constraintBottom_toBottomOf="@+id/assigned"
+                app:layout_constraintStart_toEndOf="@+id/assigned"
+                app:layout_constraintTop_toTopOf="@+id/assigned"
+                tools:text="In Progress" />
+
+            <TextView
+                android:id="@+id/done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/state_shap_done"
+                android:padding="8dp"
+                android:text="Done"
+                android:textColor="@color/green"
+                android:textStyle="bold"
+                android:visibility="@{item.done ?  View.VISIBLE : View.GONE }"
+                app:layout_constraintBottom_toBottomOf="@+id/assigned"
+                app:layout_constraintStart_toEndOf="@+id/assigned"
+                app:layout_constraintTop_toTopOf="@+id/assigned"
+                tools:text="Done" />
+
+
+            <ImageView
+                android:id="@+id/delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> listener.onClickDeleteButton(item)}"
+                android:src="@drawable/ic_baseline_cancel_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/purple_500" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

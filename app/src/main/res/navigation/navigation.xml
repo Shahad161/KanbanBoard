@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/notesFragment">
+
+    <fragment
+        android:id="@+id/notesFragment"
+        android:name="com.example.kanban_board.ui.notes.NotesFragment"
+        android:label="NotesFragment"
+        tools:layout="@layout/fragment_notes"
+
+        >
+        <action
+            android:id="@+id/action_notesFragment_to_addNoteFragment"
+            app:destination="@id/addNoteFragment"
+            app:popUpTo="@id/notesFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_notesFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNoteFragment"
+        android:name="com.example.kanban_board.ui.addNote.AddNoteFragment"
+        android:label="AddNoteFragment"
+        tools:layout="@layout/fragment_add_note"
+
+        />
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.example.kanban_board.ui.updateNote.UpdateFragment"
+        android:label="UpdateFragment"
+        tools:layout="@layout/fragment_update"
+
+        >
+        <argument
+            android:name="noteItem"
+            app:argType="com.example.kanban_board.data.Note" />
+    </fragment>
+</navigation>
